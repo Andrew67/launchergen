@@ -40,7 +40,6 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
     <li>Numeric input for application selection only.</li>
     <li>ASCII and Shift_JIS are the only supported encodings.</li>
     <li>Display names cannot contain the &quot; character.</li>
-    <li>Path only; no support for flags.</li>
 </ul>
 
 <!-- BEGIN AD CODE -->
@@ -78,7 +77,8 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
             <?php if ($i == 1): ?> (default) <?php endif; ?>
         </legend>
         <label>Display name: <input type="text" name="name[]" placeholder="App <?=$i?>"></label>
-        <label>Executable path: <input type="text" name="path[]" placeholder="C:\app.exe" size="64"></label>
+        <label>Executable path: <input type="text" name="path[]" placeholder="C:\app.exe"></label>
+        <label>Flags (optional): <input type="text" name="flag[]"></label>
     </fieldset>
     <?php endfor; ?>
     <button type="submit">Generate batch file</button>

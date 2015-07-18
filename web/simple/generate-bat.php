@@ -38,8 +38,8 @@ function win_dirname($path) {
 }
 
 // Sanity check: form arrays set
-if (empty($_POST['name']) || empty($_POST['path'])) {
-    throw_error('No application data provided.');
+if (empty($_POST['name']) || empty($_POST['path']) || empty($_POST['flag'])) {
+    throw_error('Missing application data.');
 }
 // Sanity check: no more than 20 applications
 if (count($_POST['path']) > 20) {
@@ -49,6 +49,7 @@ if (count($_POST['path']) > 20) {
 // Import values into namespace / set defaults
 $names = $_POST['name'];
 $paths = $_POST['path'];
+$flags = $_POST['flag'];
 $header = !empty($_POST['header']) ? $_POST['header'] : 'Application Launcher';
 $list_header = !empty($_POST['list_header']) ? $_POST['list_header'] : 'Available applications:';
 $prompt = !empty($_POST['prompt']) ? $_POST['prompt'] : 'Select an application by typing the number and pressing "Enter" (default=1):';
@@ -83,7 +84,8 @@ goto :block1
 :block<?=$n+1?>
 
 cd "<?=win_dirname($path)?>"
-start "<?=$names[$n]?>" "<?=$path?>"
+start "<?=$names[$n]?>" "<?=$path?>" <?=$flags[$n]?>
+
 exit
 
 <?php endforeach; ?>
