@@ -38,7 +38,7 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
     <li>Maximum of 20 applications.</li>
     <li>Default application is always application #1.</li>
     <li>Numeric input for application selection only.</li>
-    <li>ASCII and Shift_JIS are the only supported display name encodings.</li>
+    <li>ASCII and Shift_JIS are the only supported encodings.</li>
     <li>Display names cannot contain the &quot; character.</li>
     <li>Path only; no support for flags.</li>
 </ul>
@@ -65,6 +65,12 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
 </form>
 
 <form method="POST" action="generate-bat.php" accept-charset="<?=$charset?>">
+    <fieldset>
+        <legend>Launcher Options</legend>
+        <label>Header: <input type="text" name="header" placeholder="Application Launcher"></label>
+        <label>List Header: <input type="text" name="list_header" placeholder="Available applications:"></label>
+        <label>Prompt: <input type="text" name="prompt" placeholder="Select an application by typing the number and pressing &quot;Enter&quot; (default=1):"></label>
+    </fieldset>
     <?php for ($i=1; $i<=$numapps; ++$i): ?>
     <fieldset>
         <legend>
