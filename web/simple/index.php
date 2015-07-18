@@ -27,6 +27,11 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
 <head>
     <title>LauncherGen Simple</title>
     <meta charset="utf-8">
+    <style>
+        label {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <h1>LauncherGen (Simple Version)</h1>
@@ -69,6 +74,46 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
         <label>Header: <input type="text" name="header" placeholder="Application Launcher"></label>
         <label>List Header: <input type="text" name="list_header" placeholder="Available applications:"></label>
         <label>Prompt: <input type="text" name="prompt" placeholder="Select an application by typing the number and pressing &quot;Enter&quot; (default=1):"></label>
+        <label>Background text color:
+            <select name="bgcolor">
+                <option value="0" selected>Black</option>
+                <option value="1">Blue</option>
+                <option value="2">Green</option>
+                <option value="3">Aqua</option>
+                <option value="4">Red</option>
+                <option value="5">Purple</option>
+                <option value="6">Yellow</option>
+                <option value="7">White</option>
+                <option value="8">Gray</option>
+                <option value="9">Light blue</option>
+                <option value="a">Light green</option>
+                <option value="b">Light aqua</option>
+                <option value="c">Light red</option>
+                <option value="d">Light purple</option>
+                <option value="e">Light yellow</option>
+                <option value="f">Bright white</option>
+            </select>
+        </label>
+        <label>Foreground text color:
+            <select name="fgcolor">
+                <option value="0">Black</option>
+                <option value="1">Blue</option>
+                <option value="2">Green</option>
+                <option value="3">Aqua</option>
+                <option value="4">Red</option>
+                <option value="5">Purple</option>
+                <option value="6">Yellow</option>
+                <option value="7" selected>White</option>
+                <option value="8">Gray</option>
+                <option value="9">Light blue</option>
+                <option value="a">Light green</option>
+                <option value="b">Light aqua</option>
+                <option value="c">Light red</option>
+                <option value="d">Light purple</option>
+                <option value="e">Light yellow</option>
+                <option value="f">Bright white</option>
+            </select>
+        </label>
     </fieldset>
     <?php for ($i=1; $i<=$numapps; ++$i): ?>
     <fieldset>
@@ -77,7 +122,7 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
             <?php if ($i == 1): ?> (default) <?php endif; ?>
         </legend>
         <label>Display name: <input type="text" name="name[]" placeholder="App <?=$i?>"></label>
-        <label>Executable path: <input type="text" name="path[]" placeholder="C:\app.exe"></label>
+        <label>Executable path: <input type="text" name="path[]" placeholder="C:\app.exe" size="64"></label>
         <label>Flags (optional): <input type="text" name="flag[]"></label>
     </fieldset>
     <?php endfor; ?>
