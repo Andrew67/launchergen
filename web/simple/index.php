@@ -19,19 +19,15 @@
  */
 
 // Preservation of generator options / defaults
-$numapps = (is_numeric($_GET['numapps']) && $_GET['numapps'] <= 20) ? $_GET['numapps'] : 5;
-$charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii';
+$numapps = (!empty($_GET['numapps']) && is_numeric($_GET['numapps']) && $_GET['numapps'] <= 20)
+    ? $_GET['numapps'] : 5;
+$charset = !empty($_GET['charset']) ? htmlspecialchars($_GET['charset']) : 'us-ascii';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>LauncherGen Simple</title>
     <meta charset="utf-8">
-    <style>
-        label {
-            display: block;
-        }
-    </style>
 </head>
 <body>
 <h1>LauncherGen (Simple Version)</h1>
@@ -57,13 +53,13 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
 <form method="GET" action="index.php">
     <fieldset>
         <legend>Generator Options <b>(Warning: changes here will empty your application settings below!)</b></legend>
-        <label>Number of applications: <input type="number" name="numapps" value="<?=$numapps?>"></label>
+        <label>Number of applications: <input type="number" name="numapps" value="<?=$numapps?>"></label><br>
         <label>Display name encoding:
             <select name="charset">
                 <option value="us-ascii">English (US-ASCII)</option>
                 <option value="shift_jis" <?php if ($charset == 'shift_jis') echo "selected"; ?>>Japanese (Shift_JIS)</option>
             </select>
-        </label>
+        </label><br>
         <button type="submit">Change options</button>
     </fieldset>
 </form>
@@ -71,9 +67,9 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
 <form method="POST" action="generate-bat.php" accept-charset="<?=$charset?>">
     <fieldset>
         <legend>Launcher Options</legend>
-        <label>Header: <input type="text" name="header" placeholder="Application Launcher"></label>
-        <label>List Header: <input type="text" name="list_header" placeholder="Available applications:"></label>
-        <label>Prompt: <input type="text" name="prompt" placeholder="Select an application by typing the number and pressing &quot;Enter&quot; (default=1):"></label>
+        <label>Header: <input type="text" name="header" placeholder="Application Launcher"></label><br>
+        <label>List Header: <input type="text" name="list_header" placeholder="Available applications:"></label><br>
+        <label>Prompt: <input type="text" name="prompt" placeholder="Select an application by typing the number and pressing &quot;Enter&quot; (default=1):" size="50"></label><br>
         <label>Background text color:
             <select name="bgcolor">
                 <option value="0" selected>Black</option>
@@ -93,7 +89,7 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
                 <option value="e">Light yellow</option>
                 <option value="f">Bright white</option>
             </select>
-        </label>
+        </label><br>
         <label>Foreground text color:
             <select name="fgcolor">
                 <option value="0">Black</option>
@@ -121,8 +117,8 @@ $charset = !empty($_GET['charset']) ? htmlentities($_GET['charset']) : 'us-ascii
             Application #<?=$i?>
             <?php if ($i == 1): ?> (default) <?php endif; ?>
         </legend>
-        <label>Display name: <input type="text" name="name[]" placeholder="App <?=$i?>"></label>
-        <label>Executable path: <input type="text" name="path[]" placeholder="C:\app.exe" size="64"></label>
+        <label>Display name: <input type="text" name="name[]" placeholder="App <?=$i?>"></label><br>
+        <label>Executable path: <input type="text" name="path[]" placeholder="C:\app.exe" size="64"></label><br>
         <label>Flags (optional): <input type="text" name="flag[]"></label>
     </fieldset>
     <?php endfor; ?>
