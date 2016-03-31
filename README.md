@@ -13,4 +13,3 @@ As the generated launcher is a batch file, it will consume barely any space or C
 ## Target OS
 Minimum target OS is Windows XP, so some useful commands introduced in later versions cannot be used.
 However, features that definitely require those commands may be added as optional configuration options (with the appropriate requirements listed).
-Simple version will not include these features.

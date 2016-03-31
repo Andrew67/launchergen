@@ -1,7 +1,7 @@
 <?php
 /**
  * LauncherGen - Windows Application Launcher Batch File Generator
- * Copyright (C) 2015  Andrés Cordero
+ * Copyright (C) 2015-2016 Andrés Cordero
  * Web: https://github.com/Andrew67/launchergen
  *
  * This program is free software: you can redistribute it and/or modify
@@ -33,14 +33,21 @@ $charset = !empty($_GET['charset']) ? htmlspecialchars($_GET['charset']) : 'us-a
 <h1>LauncherGen (Simple Version)</h1>
 <h2>Windows Application Launcher Batch File Generator</h2>
 <h3>Project information: <a href="https://github.com/Andrew67/launchergen">https://github.com/Andrew67/launchergen</a></h3>
-<h4>Simple version limitations:</h4>
+<h4>Limitations / Known Issues:</h4>
 <ul>
     <li>Cannot import/export form data.</li>
     <li>Maximum of 20 applications.</li>
     <li>Default application is always application #1.</li>
     <li>Numeric input for application selection only.</li>
-    <li>ASCII and Shift_JIS are the only supported encodings.</li>
-    <li>Display names cannot contain the &quot; character.</li>
+    <li>Encoding-specific issues:
+        <ul>
+            <li>Display names cannot contain the &quot; or &amp; characters.</li>
+            <li>"English (US-ASCII)" is the recommended option, unless your system locale is set to Japanese.</li>
+            <li>If you specify characters not included in the selected encoding, the batch file will fail.</li>
+            <li><i>Windows XP/Vista:</i> The "Unicode (UTF-8)" encoding causes the batch file to fail.</li>
+            <li>The "Japanese (Shift_JIS)" and "Western European (ISO-8859-1)" options may fail when the system locale differs.</li>
+        </ul>
+    </li>
 </ul>
 
 <!-- BEGIN AD CODE -->
@@ -56,8 +63,10 @@ $charset = !empty($_GET['charset']) ? htmlspecialchars($_GET['charset']) : 'us-a
         <label>Number of applications: <input type="number" name="numapps" value="<?=$numapps?>"></label><br>
         <label>Display name encoding:
             <select name="charset">
-                <option value="us-ascii">English (US-ASCII)</option>
+                <option value="us-ascii" <?php if ($charset == 'us-ascii') echo "selected"; ?>>English (US-ASCII)</option>
                 <option value="shift_jis" <?php if ($charset == 'shift_jis') echo "selected"; ?>>Japanese (Shift_JIS)</option>
+                <option value="iso-8859-1" <?php if ($charset == 'iso-8859-1') echo "selected"; ?>>Western European (ISO-8859-1)</option>
+                <option value="utf-8" <?php if ($charset == 'utf-8') echo "selected"; ?>>Unicode (UTF-8)</option>
             </select>
         </label><br>
         <button type="submit">Change options</button>
@@ -65,6 +74,7 @@ $charset = !empty($_GET['charset']) ? htmlspecialchars($_GET['charset']) : 'us-a
 </form>
 
 <form method="POST" action="generate-bat.php" accept-charset="<?=$charset?>">
+    <input type="hidden" name="charset" value="<?=$charset?>">
     <fieldset>
         <legend>Launcher Options</legend>
         <label>Header: <input type="text" name="header" placeholder="Application Launcher"></label><br>
