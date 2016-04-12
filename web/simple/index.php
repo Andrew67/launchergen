@@ -26,8 +26,8 @@ class App {
 }
 
 // Preservation of generator options / defaults
-$numapps = (!empty($_GET['numapps']) && is_numeric($_GET['numapps']) && $_GET['numapps'] <= 20 && $_GET['numapps'] > 0)
-    ? $_GET['numapps'] : 5;
+$numapps = (!empty($_GET['numapps']) && is_numeric($_GET['numapps']) && $_GET['numapps'] <= 20 && $_GET['numapps'] >= 2)
+    ? $_GET['numapps'] : 2;
 $charset = !empty($_GET['charset']) ? htmlspecialchars($_GET['charset']) : 'us-ascii';
 
 /* Load launcher data from an export
@@ -77,8 +77,8 @@ function selected($expected, $actual) {
 <h3>Project information: <a href="https://github.com/Andrew67/launchergen">https://github.com/Andrew67/launchergen</a></h3>
 <h4>Limitations / Known Issues:</h4>
 <ul>
-    <li>Cannot import/export form data.</li>
-    <li>Maximum of 20 applications.</li>
+    <li>Cannot export form data.</li>
+    <li>Maximum of 20 applications, minimum 2.</li>
     <li>Default application is always application #1.</li>
     <li>Numeric input for application selection only.</li>
     <li>Encoding-specific issues:
