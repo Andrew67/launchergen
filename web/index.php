@@ -159,20 +159,20 @@ function selected($expected, $actual) {
                 <option value="f" <?=selected('f', $fgcolor)?>>Bright white</option>
             </select>
         </label>
+        <?php for ($i=1; $i<=$numapps; ++$i): ?>
+            <?php $app = isset($apps[$i-1]) ? $apps[$i-1] : new App(); ?>
+            <fieldset>
+                <legend>
+                    Application #<?=$i?>
+                    <?php if ($i == 1): ?> (default) <?php endif; ?>
+                </legend>
+                <label>Display name: <input type="text" name="name[]" placeholder="App <?=$i?>" value="<?=$app->name?>"></label><br>
+                <label>Executable path: <input type="text" name="path[]" placeholder="C:\app.exe" size="64" value="<?=$app->path?>"></label><br>
+                <label>Flags (optional): <input type="text" name="flag[]" value="<?=$app->flag?>"></label>
+            </fieldset>
+        <?php endfor; ?>
+        <button type="submit">Generate batch file</button>
     </fieldset>
-    <?php for ($i=1; $i<=$numapps; ++$i): ?>
-    <?php $app = isset($apps[$i-1]) ? $apps[$i-1] : new App(); ?>
-    <fieldset>
-        <legend>
-            Application #<?=$i?>
-            <?php if ($i == 1): ?> (default) <?php endif; ?>
-        </legend>
-        <label>Display name: <input type="text" name="name[]" placeholder="App <?=$i?>" value="<?=$app->name?>"></label><br>
-        <label>Executable path: <input type="text" name="path[]" placeholder="C:\app.exe" size="64" value="<?=$app->path?>"></label><br>
-        <label>Flags (optional): <input type="text" name="flag[]" value="<?=$app->flag?>"></label>
-    </fieldset>
-    <?php endfor; ?>
-    <button type="submit">Generate batch file</button>
 </form>
 
 </body>
