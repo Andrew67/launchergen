@@ -77,7 +77,6 @@ function selected($expected, $actual) {
 <h3>Project information: <a href="https://github.com/Andrew67/launchergen">https://github.com/Andrew67/launchergen</a></h3>
 <h4>Limitations / Known Issues:</h4>
 <ul>
-    <li>Cannot export form data.</li>
     <li>Maximum of 20 applications, minimum 2.</li>
     <li>Default application is always application #1.</li>
     <li>Numeric input for application selection only.</li>
@@ -173,7 +172,16 @@ function selected($expected, $actual) {
         <?php endfor; ?>
         <button type="submit">Generate batch file</button>
     </fieldset>
+    <fieldset name="export" disabled>
+        <legend>Export Profile <noscript><b>(Requires JavaScript enabled)</b></noscript></legend>
+        <label>Bookmarkable URL:
+            <textarea cols="64" rows="10" name="export-url">http://<?=$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']?></textarea>
+        </label><br>
+        <button type="button" name="generate-url">Regenerate bookmarkable URL</button>
+    </fieldset>
 </form>
+
+<script src="js/main.js"></script>
 
 </body>
 </html>
