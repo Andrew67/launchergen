@@ -1,6 +1,6 @@
 /**
  * LauncherGen - Windows Application Launcher Batch File Generator
- * Copyright (C) 2015-2016 Andrés Cordero
+ * Copyright (C) 2016 Andrés Cordero
  * Web: https://github.com/Andrew67/launchergen
  */
 
@@ -8,7 +8,7 @@ var buildExportUrl = function() {
     var url = "";
     url += window.location.href.split("?")[0];
 
-    // Until dynamic "Generator Options" are supported, these must be the effective values, not the form inputs
+    // Effective values, as opposed to generator options input (equal in theory once dynamic)
     url += "?numapps=" + encodeURIComponent("" + document.forms["launcher"]["name[]"].length);
     url += "&charset=" + encodeURIComponent(document.forms["launcher"]["charset"].value);
 
@@ -35,11 +35,21 @@ var buildExportUrl = function() {
     return url;
 };
 
+var setLauncherCharset = function(charset) {
+    document.forms["launcher"].acceptCharset = charset;
+    document.forms["launcher"]["charset"].value = charset;
+};
+
 // Enable dynamic form elements and bind event handlers
 document.addEventListener("DOMContentLoaded", function() {
     // Export Profile
     document.forms["launcher"]["export"].disabled = false;
     document.forms["launcher"]["generate-url"].addEventListener("click", function() {
         document.forms["launcher"]["export-url"].value = buildExportUrl();
+    });
+
+    // Dynamic "display name encoding"
+    document.forms["generator"]["charset"].addEventListener("change", function() {
+        setLauncherCharset(this.value);
     });
 });
