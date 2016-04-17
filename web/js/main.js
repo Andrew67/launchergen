@@ -24,13 +24,7 @@ var buildExportUrl = function() {
         "fgcolor": launcher["fgcolor"].value,
         "apps": []
     };
-    for (var i = 0; i < launcher["name[]"].length; ++i) {
-        launcher_state.apps.push({
-            "name": launcher["name[]"][i].value,
-            "path": launcher["path[]"][i].value,
-            "flag": launcher["flag[]"][i].value
-        });
-    }
+    saveLauncherAppState(launcher_state.apps);
 
     console.info(launcher_state);
     url += "&launcher=" + encodeURIComponent(JSON.stringify(launcher_state));
@@ -41,6 +35,20 @@ var buildExportUrl = function() {
 var setLauncherCharset = function(charset) {
     launcher.acceptCharset = charset;
     launcher["charset"].value = charset;
+};
+
+// Save the launcher app form state in the array specified by dst.
+// Returns the effective amount of apps in the form.
+// If the destination array is of a longer length, it is not truncated.
+var saveLauncherAppState = function(dst) {
+    for (var i = 0; i < launcher["name[]"].length; ++i) {
+        dst[i] = {
+            "name": launcher["name[]"][i].value,
+            "path": launcher["path[]"][i].value,
+            "flag": launcher["flag[]"][i].value
+        };
+    }
+    return launcher["name[]"].length;
 };
 
 // Enable dynamic form elements and bind event handlers
