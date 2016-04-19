@@ -97,7 +97,7 @@ function selected($expected, $actual) {
 
 <form name="generator" method="GET" action="index.php">
     <fieldset>
-        <legend>Generator Options <b>(Warning: changes here will empty your application settings below!)</b></legend>
+        <legend>Generator Options <noscript><b>(Warning: changes here will empty your application settings below!)</b></noscript></legend>
         <label>Number of applications: <input type="number" name="numapps" value="<?=$numapps?>"></label><br>
         <label>Display name encoding:
             <select name="charset">
@@ -107,7 +107,7 @@ function selected($expected, $actual) {
                 <option value="utf-8" <?=selected('utf-8', $charset)?>>Unicode (UTF-8)</option>
             </select>
         </label><br>
-        <button type="submit">Change options</button>
+        <button type="submit" name="change">Change options</button>
     </fieldset>
 </form>
 
@@ -160,7 +160,7 @@ function selected($expected, $actual) {
         </label>
         <?php for ($i=1; $i<=$numapps; ++$i): ?>
             <?php $app = isset($apps[$i-1]) ? $apps[$i-1] : new App(); ?>
-            <fieldset>
+            <fieldset name="app">
                 <legend>
                     Application #<?=$i?>
                     <?php if ($i == 1): ?> (default) <?php endif; ?>
@@ -170,7 +170,7 @@ function selected($expected, $actual) {
                 <label>Flags (optional): <input type="text" name="flag[]" value="<?=$app->flag?>"></label>
             </fieldset>
         <?php endfor; ?>
-        <button type="submit">Generate batch file</button>
+        <button type="submit" name="generate">Generate batch file</button>
     </fieldset>
     <fieldset name="export" disabled>
         <legend>Export Profile <noscript><b>(Requires JavaScript enabled)</b></noscript></legend>
