@@ -4,8 +4,8 @@
  * Web: https://github.com/Andrew67/launchergen
  */
 
-var launcher = document.forms["launcher"];
-var generator = document.forms["generator"];
+var launcher = document.forms["launcher"].elements;
+var generator = document.forms["generator"].elements;
 
 var buildExportUrl = function() {
     var url = "";
@@ -25,15 +25,13 @@ var buildExportUrl = function() {
         "apps": []
     };
     saveLauncherAppState(launcher_state.apps);
-
-    console.info(launcher_state);
     url += "&launcher=" + encodeURIComponent(JSON.stringify(launcher_state));
 
     return url;
 };
 
 var setLauncherCharset = function(charset) {
-    launcher.acceptCharset = charset;
+    document.forms["launcher"].acceptCharset = charset;
     launcher["charset"].value = charset;
 };
 
@@ -82,7 +80,8 @@ var truncateAppList = function(newsize) {
     var nodesToRemove = [];
     // Catch the elements in a separate array, and then remove them.
     // Otherwise, the dynamic NodeList gets emptied as you go and the calculation is missed.
-    for (var i = newsize; i < apps.length; ++i) {
+    // i = Number(...) is used due to some browsers (Edge) implementations of HTMLCollection.item returning null on string indexes.
+    for (var i = Number(newsize); i < apps.length; ++i) {
         nodesToRemove.push(apps.item(i));
     }
     for (i = 0; i < nodesToRemove.length; ++i) {
@@ -121,7 +120,7 @@ var expandAppList = function(newsize) {
 // Enable dynamic form elements and bind event handlers
 document.addEventListener("DOMContentLoaded", function() {
     // Export Profile
-    launcher["export"].disabled = false;
+    document.getElementsByName("export")[0].disabled = false;
     launcher["generate-url"].addEventListener("click", function() {
         launcher["export-url"].value = buildExportUrl();
     });
