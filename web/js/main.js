@@ -140,6 +140,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Remove the submit button in "generator options", as they're dynamic
+    // Remove the submit button in "generator options" and suppress form submission, as they're now dynamic
     generator["change"].remove();
+    document.forms["generator"].addEventListener("submit", function(e) {
+        e.preventDefault();
+    });
 });
