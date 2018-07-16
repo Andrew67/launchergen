@@ -92,7 +92,7 @@ function selected($expected, $actual) {
 </ul>
 
 <!-- BEGIN AD CODE -->
-<iframe id="id01_965427" src="http://www.play-asia.com/paOScore/ads2/190%2C000000%2Cnone%2C0%2C0%2C0%2C0%2CFFFFFF%2C000000%2Cleft%2C0%2C1-391-765-70bpzf-062-781o-29333-90xvq9-44570px?inlinelogo=1&amp;url=launchergen%255Bdot%255Dandrew67%255Bdot%255Dcom%255Bobs%255D" style="border: 0 none #000000; padding: 0; margin: 0; overflow: hidden;" width="570" height="111" scrolling="no"></iframe>
+<iframe id="id01_965427" src="https://www.play-asia.com/paOScore/ads2/190%2C000000%2Cnone%2C0%2C0%2C0%2C0%2CFFFFFF%2C000000%2Cleft%2C0%2C1-391-765-70bpzf-062-781o-29333-90xvq9-44570px?inlinelogo=1&amp;url=launchergen%255Bdot%255Dandrew67%255Bdot%255Dcom%255Bobs%255D" style="border: 0 none #000000; padding: 0; margin: 0; overflow: hidden;" width="570" height="111" scrolling="no"></iframe>
 <!-- END AD CODE -->
 
 <form name="generator" method="GET" action="index.php">
